@@ -4,6 +4,8 @@
 */
 const cards = document.querySelector('.cards')
 console.log(cards)
+
+
 axios.get('https://api.github.com/users/ChrisDelf')
   .then(data => {
     console.log("ChrisDelf's profile:", data)
@@ -44,7 +46,7 @@ axios.get('https://api.github.com/users/ChrisDelf')
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ["thayerve", "patpalmerston", "tetondan", "luishrd", "bigknell"];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -74,7 +76,7 @@ function createGitCard (user) {
   const realName = document.createElement('p')
   const location = document.createElement('p')
   const profile = document.createElement('p')
-  const profileAddress = document.createElement('p')
+  const profileAddress = document.createElement('a')
   const followers = document.createElement('p')
   const following = document.createElement('p')
   const bio = document.createElement('p')
@@ -85,20 +87,21 @@ function createGitCard (user) {
   img.classList.add('img')
   cardInfo.classList.add('card-info')
   userName.classList.add('name')
-  profile.classList.add('p')
-  profile.classList.add('a')
+  //profile.classList.add('p')
+  //profileAddress.classList.add('a')
 
 
 // adding the content.
 img.src = user.avatar_url
 userName.textContent = user.login
 realName.textContent = user.name
-location.textContent = 'Location: ${user.gravatar_id}'
-profile.textContent =  'Profile'
-profileAddress.textContent = user.html_url
-followers.textContent = 'Followers: ${user.followers}'
-following.textContent = 'Following: ${user.following}'
-bio.textContent= 'Bio ${user.bio}'
+location.textContent = 'Location:'+ user.location
+profile.textContent =  'Profile  '
+profileAddress.href = user.html_url;
+profileAddress.innerHTML = user.html_url;
+followers.textContent = 'Followers: ' + user.followers
+following.textContent = 'Following: '+ user.following
+bio.textContent= 'Bio: ' + user.bio
 
 // setting up the structure
 cardDiv.appendChild(img)
