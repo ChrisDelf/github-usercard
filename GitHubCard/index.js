@@ -50,7 +50,7 @@ const followersArray = ["thayerve", "patpalmerston", "tetondan", "luishrd", "big
 
 
 
-followersArray.forEach(followers => {
+setTimeout(function(){followersArray.forEach(followers => {
 axios.get('https://api.github.com/users/'+ followers)
   .then(data => {
     console.log(data)
@@ -61,7 +61,7 @@ axios.get('https://api.github.com/users/'+ followers)
 
 
 })
-})
+})} , 100);
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
