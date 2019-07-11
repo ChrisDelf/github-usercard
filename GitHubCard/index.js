@@ -13,7 +13,8 @@ axios.get('https://api.github.com/users/ChrisDelf')
     console.log("data", profiles)
     const element = createGitCard(data.data)
      cards.appendChild(element)
-    })
+  })
+
 
 
 
@@ -22,7 +23,6 @@ axios.get('https://api.github.com/users/ChrisDelf')
     console.log("The github api ran into an issuse", error)
 
   })
-
 
 
 /* Step 2: Inspect and study the data coming back, this is YOUR
@@ -47,6 +47,21 @@ axios.get('https://api.github.com/users/ChrisDelf')
 */
 
 const followersArray = ["thayerve", "patpalmerston", "tetondan", "luishrd", "bigknell"];
+
+
+
+followersArray.forEach(followers => {
+axios.get('https://api.github.com/users/'+ followers)
+  .then(data => {
+    console.log(data)
+    const elements = createGitCard(data.data)
+    cards.appendChild(elements)
+
+
+
+
+})
+})
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
