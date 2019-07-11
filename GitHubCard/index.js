@@ -2,12 +2,18 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-
+const cards = document.querySelector('.cards')
+console.log(cards)
 axios.get('https://api.github.com/users/ChrisDelf')
   .then(data => {
     console.log("ChrisDelf's profile:", data)
+    const profiles = data.data
+    console.log("data", profiles)
+    const element = createGitCard(data.data)
+     cards.appendChild(element)
+    })
 
-  })
+
 
 // handles error
   .catch(error => {
@@ -61,36 +67,54 @@ const followersArray = [];
 */
 function createGitCard (user) {
   //creating the elements
-  const cardDiv = document.CreateElement('div')
+  const cardDiv = document.createElement('div')
   const img = document.createElement('img')
+  const cardInfo = document.createElement('div')
   const userName = document.createElement('h3')
   const realName = document.createElement('p')
   const location = document.createElement('p')
-  const profile = document.createElement('a')
+  const profile = document.createElement('p')
+  const profileAddress = document.createElement('p')
   const followers = document.createElement('p')
   const following = document.createElement('p')
   const bio = document.createElement('p')
-}
+
 
 //setting class styling
   cardDiv.classList.add('card')
   img.classList.add('img')
+  cardInfo.classList.add('card-info')
   userName.classList.add('name')
+  profile.classList.add('p')
   profile.classList.add('a')
+
 
 // adding the content.
 img.src = user.avatar_url
 userName.textContent = user.login
 realName.textContent = user.name
-location.textContent = user.gravatar_id
-profile.textContent =  user.html_url
-follower.textContent = user.followers
-following.textContent =user.following
-bio.textContent= user.bio
+location.textContent = 'Location: ${user.gravatar_id}'
+profile.textContent =  'Profile'
+profileAddress.textContent = user.html_url
+followers.textContent = 'Followers: ${user.followers}'
+following.textContent = 'Following: ${user.following}'
+bio.textContent= 'Bio ${user.bio}'
 
 // setting up the structure
+cardDiv.appendChild(img)
+cardDiv.appendChild(cardInfo)
+cardInfo.appendChild(userName)
+cardInfo.appendChild(realName)
+cardInfo.appendChild(location)
+cardInfo.appendChild(profile)
+profile.appendChild(profileAddress)
+cardInfo.appendChild(followers)
+cardInfo.appendChild(following)
+cardInfo.appendChild(bio)
 
 
+return cardDiv
+}
 
 
 
